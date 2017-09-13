@@ -11,6 +11,7 @@ public class mapGen{
         mapY=getRandomNumber(3,10);
         mapGrid=new String[mapX][mapY];
         fillRooms();
+        System.out.println("");
     }
     public static void getSpawnRoom(){
         boolean loop=true;
@@ -61,17 +62,12 @@ public class mapGen{
         mapGrid[shopX][shopY]="shop";
     }
     public static int getRandomNumber(int min,int max){
-        int randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
+        int randomNum = ThreadLocalRandom.current().nextInt(min, max);
         
         return randomNum;
-        
-        // int returnNumber;
-        // Random rn=new Random();
-        // returnNumber=rn.nextInt(min)+(max-min);
-        // return returnNumber;
     }
     public static boolean isRoomEmpty(int x, int y){
-        if(mapGrid[x][y]==""){   //this line gives an error Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: 10
+        if(mapGrid[x][y]==null){   //this line gives an error fucking reeeee
             return true;
         }
         else{
@@ -82,7 +78,6 @@ public class mapGen{
         getSpawnRoom();
         getExitRoom();
         getShop();
-
         for(int x=0;x<mapX;x++){
             for(int y=0;y<mapY;y++){
                 if(isRoomEmpty(x,y)){
@@ -96,6 +91,5 @@ public class mapGen{
                 }
             }
         }
-        System.out.println(mapX+""+mapY);
     }
 }
