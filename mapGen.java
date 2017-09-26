@@ -6,14 +6,19 @@ public class mapGen{
     public static int mapX=0;
     public static int mapY=0;
     static String[][] mapGrid;
+    static String[][] tileGrid;
+    int currentTileX;
+    int currentTileY;
+    int currentSlotX;
+    int currentSlotY;
     public static void main(String[] args){
-        mapX=getRandomNumber(3,10);
-        mapY=getRandomNumber(3,10);
+        mapX=getRandomNumber(3,5);
+        mapY=getRandomNumber(3,5);
         mapGrid=new String[mapX][mapY];
         fillRooms();
         System.out.println("");
     }
-    public static void getSpawnRoom(){
+    public static void getSpawn(){
         boolean loop=true;
         int spawnX=0;
         int spawnY=0;
@@ -29,7 +34,7 @@ public class mapGen{
         }
         mapGrid[spawnX][spawnY]="spawn";    
     }
-    public static void getExitRoom(){
+    public static void getExit(){
         boolean loop=true;
         int exitX=0;
         int exitY=0;
@@ -67,7 +72,7 @@ public class mapGen{
         return randomNum;
     }
     public static boolean isRoomEmpty(int x, int y){
-        if(mapGrid[x][y]==null){   //this line gives an error fucking reeeee
+        if(mapGrid[x][y]==null){
             return true;
         }
         else{
@@ -75,8 +80,8 @@ public class mapGen{
         } 
     }
     public static void fillRooms(){
-        getSpawnRoom();
-        getExitRoom();
+        getSpawn();
+        getExit();
         getShop();
         for(int x=0;x<mapX;x++){
             for(int y=0;y<mapY;y++){
@@ -84,12 +89,75 @@ public class mapGen{
                     int roomDecider=getRandomNumber(1,4);
                     switch(roomDecider){
                         case 1: mapGrid[x][y]="monster";
+                        break;
                         case 2: mapGrid[x][y]="loot";
+                        break;
                         case 3: mapGrid[x][y]="chest";
+                        break;
                         case 4: mapGrid[x][y]="standard";
+                        break;
                     }
                 }
             }
         }
+    }
+    public static void initialiseMap(){
+        currentSlotX=0;
+        currentSlotY=0;
+        if() //walls should be on tile 1, 12, 23, 34 etc
+
+        // tileGrid[][]=new String[(mapX*10)+mapX][(mapY*10)+mapY];
+        // currentSlotX=0;
+        // currentSlotY=0;     
+        // currentTileX=0;
+        // currentTileY=0;
+        // tileGrid[currentTileX][currentTileY]="wall";
+        // while(currentSlotX<mapX){
+        //     while(currentSlotY<mapY){
+        //         String currentSlot=mapGrid[currentSlotX][currentSlotY];
+        //         switch(currentSlot){
+        //             case "monster":getMonsterRoom();
+        //             break;
+        //             case "loot":getTreasureRoom();
+        //             break;
+        //             case "chest":getChestRoom();
+        //             break;
+        //             case "standard":getStandardRoom();
+        //             break;
+        //             case "shop":getShopRoom();
+        //             break;
+        //             case "spawn":getSpawnRoom()
+        //             break;
+        //             case "exit":getExitRoom();
+        //             break;
+        //         }
+        //         currentSlotY++;
+        //     }
+        //     currentSlotX++;
+        // }
+    }
+    public static void getMonsterRoom(){
+        
+    }
+    public static void getTreasureRoom(){
+
+    }
+    public static void getChestRoom(){  
+        
+    }
+    public static void getStandardRoom(){ 
+        
+    }
+    public static void getShopRoom(){
+        
+    }
+    public static void getSpawnRoom(){
+        
+    }
+    public static void getExitRoom(){
+        
+    }
+    public static void writeToImage(){
+
     }
 }

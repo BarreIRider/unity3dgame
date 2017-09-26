@@ -1,0 +1,17 @@
+"wall"
+"monster"
+"loot"
+"standard"
+"spawn"
+"shop"
+"exit"
+
+Tile ID
+0=empty
+1=monster
+2=item
+3=chest
+4=wall
+5=shop item
+6=spawn (single use)
+7=exit (single use)
