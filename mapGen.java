@@ -1,5 +1,8 @@
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
+import java.awt.image.BufferedImage;
+import java.io.File;
+
 
 public class mapGen{
 
@@ -7,13 +10,13 @@ public class mapGen{
     public static int mapY=0;
     static String[][] mapGrid;
     static String[][] tileGrid;
-    int currentTileX;
-    int currentTileY;
-    int currentSlotX;
-    int currentSlotY;
+    static int currentTileX;
+    static int currentTileY;
+    static int currentSlotX;
+    static int currentSlotY;
     public static void main(String[] args){
-        mapX=getRandomNumber(3,5);
-        mapY=getRandomNumber(3,5);
+        mapX=5;   //removed random map size, is now set to 5
+        mapY=5;   //removed random map size, is now set to 5
         mapGrid=new String[mapX][mapY];
         fillRooms();
         System.out.println("");
@@ -104,42 +107,122 @@ public class mapGen{
     public static void initialiseMap(){
         currentSlotX=0;
         currentSlotY=0;
-        if() //walls should be on tile 1, 12, 23, 34 etc
-
-        // tileGrid[][]=new String[(mapX*10)+mapX][(mapY*10)+mapY];
-        // currentSlotX=0;
-        // currentSlotY=0;     
-        // currentTileX=0;
-        // currentTileY=0;
-        // tileGrid[currentTileX][currentTileY]="wall";
-        // while(currentSlotX<mapX){
-        //     while(currentSlotY<mapY){
-        //         String currentSlot=mapGrid[currentSlotX][currentSlotY];
-        //         switch(currentSlot){
-        //             case "monster":getMonsterRoom();
-        //             break;
-        //             case "loot":getTreasureRoom();
-        //             break;
-        //             case "chest":getChestRoom();
-        //             break;
-        //             case "standard":getStandardRoom();
-        //             break;
-        //             case "shop":getShopRoom();
-        //             break;
-        //             case "spawn":getSpawnRoom()
-        //             break;
-        //             case "exit":getExitRoom();
-        //             break;
-        //         }
-        //         currentSlotY++;
-        //     }
-        //     currentSlotX++;
-        // }
+        tileGrid=new String[(mapX*10)+mapX+1][(mapY*10)+mapY+1]; 
+        currentTileX=0;
+        currentTileY=0;
+        while(currentSlotX<=mapX){
+            while(currentSlotY<=mapY){
+                String currentSlot=mapGrid[currentSlotX][currentSlotY];
+                if(currentTileX==0||currentTileX==11||currentTileX==22||currentTileX==33||currentTileX==44||currentTileX==55||currentTileY==0||currentTileY==11||currentTileY==22||currentTileY==33||currentTileY==44||currentTileY==55){ //5 x wall tiles, 5 y wall tiles
+                    tileGrid[currentTileX][currentTileY]="4";
+                }
+                else{
+                    switch(currentSlot){
+                        case "monster":
+                            getMonsterRoom();
+                            break;
+                        case "loot":
+                            getTreasureRoom();
+                            break;
+                        case "chest":
+                            getChestRoom();
+                            break;
+                        case "standard":
+                            getStandardRoom();
+                            break;
+                        case "shop":
+                            getShopRoom();
+                            break;
+                        case "spawn":
+                            getSpawnRoom();
+                            break;
+                        case "exit":
+                            getExitRoom();
+                            break;
+                        default:
+                            //ERROR
+                            break;
+                    }
+                }
+                currentSlotY++;
+            }
+            currentSlotX++;
+        }
     }
     public static void getMonsterRoom(){
-        
+        //this should go through 10 loops giving random IDs to each tile.
+        for(int x=0;x<=10;x++){
+            for(int y=0;y<=10;y++){
+                int currentTileId=getRandomNumber(0,7);
+                switch (currentTileId) {
+                    case 0: //empty
+                        tileGrid[currentTileX][currentTileY]="0";
+                        break;
+                    case 1: //empty
+                        tileGrid[currentTileX][currentTileY]="0";
+                        break;
+                    case 2: //empty
+                        tileGrid[currentTileX][currentTileY]="0";
+                        break;
+                    case 3: //empty
+                        tileGrid[currentTileX][currentTileY]="0";
+                        break;
+                    case 4: //monster
+                        tileGrid[currentTileX][currentTileY]="1";
+                        break;
+                    case 5: //monster
+                        tileGrid[currentTileX][currentTileY]="1";
+                        break;
+                    case 6: //monster
+                        tileGrid[currentTileX][currentTileY]="1";
+                        break;
+                    case 7: //chest
+                        tileGrid[currentTileX][currentTileY]="3";
+                        break;
+                    default:
+                        tileGrid[currentTileX][currentTileY]="0";
+                        break;
+                }
+            }
+        }
+
     }
     public static void getTreasureRoom(){
+        //this should go through 10 loops giving random IDs to each tile.
+        for(int x=0;x<=10;x++){
+            for(int y=0;y<=10;y++){
+                int currentTileId=getRandomNumber(0,7);
+                switch (currentTileId) {
+                    case 0: //empty
+                        tileGrid[currentTileX][currentTileY]="0";
+                        break;
+                    case 1: //empty
+                        tileGrid[currentTileX][currentTileY]="0";
+                        break;
+                    case 2: //empty
+                        tileGrid[currentTileX][currentTileY]="0";
+                        break;
+                    case 3: //empty
+                        tileGrid[currentTileX][currentTileY]="0";
+                        break;
+                    case 4: //monster
+                        tileGrid[currentTileX][currentTileY]="1";
+                        break;
+                    case 5: //item
+                        tileGrid[currentTileX][currentTileY]="2";
+                        break;
+                    case 6: //chest
+                        tileGrid[currentTileX][currentTileY]="3";
+                        break;
+                    case 7: //chest
+                        tileGrid[currentTileX][currentTileY]="3";
+                        break;
+                    default:
+                        tileGrid[currentTileX][currentTileY]="0";
+                        break;
+                }
+            }
+        }
 
     }
     public static void getChestRoom(){  
